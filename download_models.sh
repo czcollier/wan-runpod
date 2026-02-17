@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # --- Configuration ---
-PREFIX_DIR="${DOWNLOAD_PREFIX:-/workspace/ComfyUI}"
+PREFIX_DIR="${DOWNLOAD_PREFIX:-/workspace/ComfyUI/models}"
 
 if [ "$#" -ne 1 ]; then
     echo "Usage: $0 <input_file>"
