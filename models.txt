@@ -1,11 +1,19 @@
+# remix
 diffusion_models https://huggingface.co/FX-FeiHou/wan2.2-Remix/resolve/main/NSFW/Wan2.2_Remix_NSFW_i2v_14b_high_lighting_v2.0.safetensors
 diffusion_models https://huggingface.co/FX-FeiHou/wan2.2-Remix/resolve/main/NSFW/Wan2.2_Remix_NSFW_i2v_14b_low_lighting_v2.0.safetensors
+
+# smoothmix
 diffusion_models https://civitai.com/api/download/models/2513182?type=Model&format=SafeTensor&size=pruned&fp=fp8&token=356690ecc244b1d7f5f6297a1710c269 smoothMixWan2214BI2V_i2vV20High.safetensors
 diffusion_models https://civitai.com/api/download/models/2513186?type=Model&format=SafeTensor&size=pruned&fp=fp8&token=356690ecc244b1d7f5f6297a1710c269 smoothMixWan2214BI2V_i2vV20Low.safetensors
 
+# fun camera control
+diffusion_models https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_fun_camera_high_noise_14B_fp8_scaled.safetensors
+diffusion_models https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_fun_camera_low_noise_14B_fp8_scaled.safetensors
 
 text_encoders https://huggingface.co/NSFW-API/NSFW-Wan-UMT5-XXL/resolve/main/nsfw_wan_umt5-xxl_fp8_scaled.safetensors
+
 vae https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors
+
 #loras https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/LoRAs/Wan22-Lightning/old/Wan2.2-Lightning_I2V-A14B-4steps-lora_HIGH_fp16.safetensors
 #loras https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/LoRAs/Wan22-Lightning/old/Wan2.2-Lightning_I2V-A14B-4steps-lora_LOW_fp16.safetensors
 
@@ -14,3 +22,4 @@ loras https://civitai.com/api/download/models/2387354?type=Model&format=SafeTens
 
 loras https://civitai.com/api/download/models/2677689?type=Model&format=SafeTensor&token=356690ecc244b1d7f5f6297a1710c269 np_high.safetensors
 loras https://civitai.com/api/download/models/2674431?type=Model&format=SafeTensor&token=356690ecc244b1d7f5f6297a1710c269 np_low.safetensors
+
