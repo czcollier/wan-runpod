@@ -2,6 +2,9 @@
 
 # --- Configuration ---
 PREFIX_DIR="${DOWNLOAD_PREFIX:-/workspace/ComfyUI/models}"
+# Ensure environment variables are accessible
+C_TOKEN="$CIVITAI_TOKEN"
+H_TOKEN="$HF_TOKEN"
 
 if [ "$#" -ne 1 ]; then
     echo "Usage: $0 <input_file>"
@@ -11,30 +14,21 @@ fi
 INPUT_FILE=$1
 mkdir -p "$PREFIX_DIR"
 
-# Read the file line by line
-# Added a third variable: CUSTOM_NAME
 while read -r DIR_NAME URL CUSTOM_NAME || [[ -n "$DIR_NAME" ]]; do
-    
-    # Skip lines starting with # or empty lines
+
     [[ "$DIR_NAME" =~ ^# || -z "$DIR_NAME" ]] && continue
 
     TARGET_PATH="$PREFIX_DIR/$DIR_NAME"
-    
-    # Determine the filename: Use CUSTOM_NAME if provided, else use basename of URL
+
     if [[ -n "$CUSTOM_NAME" ]]; then
         FILE_NAME="$CUSTOM_NAME"
     else
-        FILE_NAME=$(basename "$URL")
+        FILE_NAME=$(basename "${URL%%\?*}") # Strip query params for clean filename
     fi
 
     FULL_FILE_PATH="$TARGET_PATH/$FILE_NAME"
-
-    # Create the directory if it doesn't exist
     mkdir -p "$TARGET_PATH"
-
-    echo "Checking for existing: $FULL_FILE_PATH"
-
-    # Check if file exists
+    echo "checking: $FULL_FILE_PATH"
     if [[ -f "$FULL_FILE_PATH" ]]; then
         echo "Skipping: $FILE_NAME (Already exists)"
         echo "----------------------------"
@@ -43,9 +37,26 @@ while read -r DIR_NAME URL CUSTOM_NAME || [[ -n "$DIR_NAME" ]]; do
 
     echo "Starting download: $FILE_NAME -> $TARGET_PATH/"
 
-    # Execute download
-    # Using -o instead of -O because -o allows us to specify the exact output name
-    if curl -L "$URL" -o "$FULL_FILE_PATH"; then
+    # --- Domain Specific Logic ---
+    CURL_ARGS=("-L" "$URL" "-o" "$FULL_FILE_PATH")
+
+    if [[ "$URL" == *"civitai.com"* ]]; then
+        # Append token to URL. Handle existing query params with ? or &
+        if [[ "$URL" == *"?"* ]]; then
+            CURL_ARGS[1]="${URL}&token=${C_TOKEN}"
+        else
+            CURL_ARGS[1]="${URL}?token=${C_TOKEN}"
+        fi
+        echo "Detected CivitAI: Appending token..."
+
+    elif [[ "$URL" == *"huggingface.co"* ]]; then
+        # Add Authorization Header
+        CURL_ARGS+=("-H" "Authorization: Bearer $H_TOKEN")
+        echo "Detected HuggingFace: Adding Auth Header..."
+    fi
+
+    # Execute download with dynamically built arguments
+    if curl "${CURL_ARGS[@]}"; then
         echo "Finished: $FILE_NAME"
     else
         echo "Error: Failed to download $URL"
@@ -56,3 +67,6 @@ while read -r DIR_NAME URL CUSTOM_NAME || [[ -n "$DIR_NAME" ]]; do
 done < "$INPUT_FILE"
 
 echo "All tasks complete."
+~                                                                                                               
+~                                                                                                               
+~                                                 
