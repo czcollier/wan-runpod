@@ -25,3 +25,6 @@ loras https://civitai.com/api/download/models/2674431?type=Model&format=SafeTens
 
 loras https://civitai.com/api/download/models/2553271?type=Model&format=SafeTensor&token=356690ecc244b1d7f5f6297a1710c269 dr34ml4y_low.safetensors
 loras https://civitai.com/api/download/models/2553151?type=Model&format=SafeTensor&token=356690ecc244b1d7f5f6297a1710c269 dr34ml4y_high.safetensors
+
+loras https://civitai.com/api/download/models/2460386?type=Model&format=SafeTensor&token=356690ecc244b1d7f5f6297a1710c269 cs_high.safetensors
+loras https://civitai.com/api/download/models/2460428?type=Model&format=SafeTensor&token=356690ecc244b1d7f5f6297a1710c269 cs_low.safetensors
